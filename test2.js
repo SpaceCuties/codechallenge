@@ -1,4 +1,5 @@
-print = console.log;
+{
+    print = console.log;
 
 let q = [
     [38,27, 9, 5,20,36,22,11],
@@ -9,17 +10,45 @@ let q = [
     [40,42,48,44,15,15, 1,15],
     [13,31, 9,41,13,49, 1,34]
 ];
-let 
-let answer = [];
 
-for(let x = 0; x < q.length; x++) {
-    if(x == 0) {
-        answer += q.shift();
-    }
-    print(q[x]);
+let answer = [];
+let mode = 0;
+
+
+while(q.length > 0) {
+    takefirstline();
+    takelast();
+    takebottom();
+    takefirst();
 }
 
-print("answer: "+answer);
-//print("leftover:"+q);
+function takefirstline() {
+    answer.push(q.shift());
+}
 
+function takefirst() {
+    for(let i = q.length - 1; i >= 0; i--) {
+        answer.push([q[i].shift()]);
+    }
+}
+
+function takelast() {
+    for(let i = 0; i < q.length; i++) {
+        answer.push([q[i].pop()]);
+    }
+}
+
+function takebottom() {
+    if(q.length > 0) {
+      q[q.length-1].reverse();
+      answer.push(q.pop());
+    }
+}
+answer = answer.flat();
+newanswer = "";
+
+answer.forEach((a,b,c) => {newanswer += a; newanswer += ", ";});
+newanswer = newanswer.substring(0, newanswer.length - 2);
+print("answer: "+ "[ " + newanswer + " ]");
+}
 // 0:0 0:1 0:2 0:3..... 0:7 1:7
